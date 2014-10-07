@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rock Paper Scissors</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+    <!-- Bootstrap core CSS -->
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.0/css/bootstrap.css" rel="stylesheet" media="screen">
+ 
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.2.0/respond.js"></script>
+    <![endif]-->
+	
+	<style type="text/css">
+	.alert-success { 
+	 display: none;
+	}
+	.alert-danger { 
+	 display: none;
+	}
+	.alert-warning {
+		display: none;
+	}
+	</style>
+  </head>
+  <body>
+
+	<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<div class="row clearfix">
+				<div class="col-md-2 column">
+				</div>
+				<div class="col-md-6 column" style="text-align: center;">
+				<div class="alert alert-dismissable alert-success" >
+						
+						<h4></h4> 
+						<p></p>
+					</div>
+					<div class="alert alert-dismissable alert-danger" >
+						
+						<h4></h4> 
+						<p></p>
+					</div>
+					<div class="alert alert-dismissable alert-warning" >
+						
+						<h4></h4> 
+						<p></p>
+					</div>
+					<h3 class="text-center text-primary">
+						Rock Paper Scissors<br />
+					</h3>
+					<p>Choose one.</p> 
+					<button type="button" class="btn btn-primary mychoice" id="rock">Rock</button> 
+					<button type="button" class="btn btn-primary mychoice" id="paper">Paper</button>
+					<button type="button" class="btn btn-primary mychoice" id="scissors">Scissors</button>
+					
+					
+					
+				</div>
+				<div class="col-md-4 column">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+  
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.0/js/bootstrap.min.js"></script>
+	
+	
+  <script>
+   function computerChoice () {
+
+		var num = Math.random();
+		var botchoice = "";
+		
+		if(num <= 0.33) {
+			botchoice = "rock";
+		} else if (num > 0.33 && num <= 0.66) {
+			botchoice = "paper";
+		} else {
+			botchoice = "scissors";
+		}
+		
+		return botchoice;
+   }
+   
+   function compare(choice1, choice2) {
+
+        if (choice1 === choice2) {
+				$('.alert-warning h4').text("TIE!");
+				$('.alert-warning p').text("Computer chose ("+choice2+").");
+				$('.alert-warning').show();
+				return;
+        }
+
+        if (choice1 === "rock") {
+            if (choice2 === "scissors") {
+               
+				$('.alert-success h4').text("You Win!");
+				$('.alert-success p').text("Computer chose ("+choice2+").");
+				$('.alert-success').show();
+            } else {
+     
+				$('.alert-danger h4').text("You Lose!");
+				$('.alert-danger p').text("Computer chose ("+choice2+").");
+				$('.alert-danger').show();
+            }
+			return;
+        }
+
+        if (choice1 === "paper") {
+            if (choice2 === "rock") {
+                $('.alert-success h4').text("You Win!");
+				$('.alert-success p').text("Computer chose ("+choice2+").");
+				$('.alert-success').show();
+            } else {
+               $('.alert-danger h4').text("You Lose!");
+				$('.alert-danger p').text("Computer chose ("+choice2+").");
+				$('.alert-danger').show();
+            }
+			return;
+        }
+
+        if (choice1 === "scissors") {
+            if (choice2 === "paper") {
+                $('.alert-danger h4').text("You Lose!");
+				$('.alert-danger p').text("Computer chose ("+choice2+").");
+				$('.alert-danger').show();
+            } else {
+               $('.alert-danger h4').text("You Lose!");
+				$('.alert-danger p').text("Computer chose ("+choice2+").");
+				$('.alert-danger').show();
+            }
+			return;
+        }
+
+    }
+	
+  $('.mychoice').click(function() {
+	$('.alert').hide();
+	var botchoice = computerChoice();
+	var mychoice = this.id;
+	console.log("bot: " + botchoice + "\nyou: " + mychoice);
+	compare(mychoice,botchoice);
+
+	
+  });
+
+				
+  </script>
+  </body>
+</html>
